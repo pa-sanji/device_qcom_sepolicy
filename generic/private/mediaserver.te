@@ -41,3 +41,6 @@ hal_client_domain(mediaserver , vendor_hal_imsvthal);
 
 # Allow mediaserver to use SurfaceFlinger unix stream socket for DisplayEventReceiver.
 allow mediaserver surfaceflinger:unix_stream_socket { read write };
+
+# Allow mediaserver to find the vendor perfservice, matching system_server.
+allow mediaserver vendor_perf_service:service_manager find;

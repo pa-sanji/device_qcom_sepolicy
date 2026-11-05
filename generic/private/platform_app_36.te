@@ -11,3 +11,9 @@ hal_client_domain(platform_app_36, vendor_hal_ambient_data)
 
 # allow app to be a client of DSP HAL
 hal_client_domain(platform_app_36, vendor_hal_dspmanager)
+
+# Allow platform_app_36 to use the vendor dual-camera TCM socket, matching the
+# unversioned platform_app rule. The MIUI camera app targets SDK 36 and writes
+# /dev/socket/tcm; without this, the TCM/dual-camera path is denied.
+unix_socket_connect(platform_app_36, vendor_dpmtcm, vendor_tcmd);
+allow platform_app_36 { vendor_dpmd_socket vendor_dpmtcm_socket }:sock_file w_file_perms;
